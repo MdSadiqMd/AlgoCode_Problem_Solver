@@ -3,7 +3,7 @@ import BaseError from "../errors/base.error";
 import { StatusCodes } from "http-status-codes";
 
 function errorHandler(
-  err: any,
+  err: any, // It is the Express built-in error handler Middleware
   req: Request,
   res: Response,
   next: NextFunction
