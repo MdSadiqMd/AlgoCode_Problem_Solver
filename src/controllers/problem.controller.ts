@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 function pingProblemController(req: Request, res: Response) {
-  res.json({ message: "ping problem controller" });
+  res.json({ message: "pong problem controller" });
 }
 
 function addProblem(req: Request, res: Response) {}

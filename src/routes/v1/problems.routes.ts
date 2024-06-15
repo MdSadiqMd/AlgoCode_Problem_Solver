@@ -1,9 +1,9 @@
 import express from "express";
 
-const { problemController } = require("../../controllers");
+const { problemController } = require("../../controllers/index");
 const problemRouter = express.Router();
 
-problemController.get("/", problemController.pingProblemController);
+problemRouter.get("/ping", problemController.pingProblemController);
 problemRouter.get("/:id", problemController.getProblem);
 problemRouter.get("/", problemController.getProblems);
 problemRouter.post("/", problemController.addProblem);
