@@ -3,6 +3,7 @@ const apiRouter = require("./routes/index");
 const bodyParser = require("body-parser");
 const { PORT } = require("./config/server.config");
 const errorHandler = require("./utils/errorHandler");
+const connectDB = require('./config/db.config')
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +18,7 @@ app.get("/ping", (req: Request, res: Response) => {
 
 app.use(errorHandler); // It is put in last as express has an built-in error Handler if we keep it in the start then it is of no use
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`server started at ${PORT}`);
+  connectDB();
 });
