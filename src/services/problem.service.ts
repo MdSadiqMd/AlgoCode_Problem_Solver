@@ -21,6 +21,7 @@ class ProblemService {
         this.problemRepository = problemRepository;
     }
 
+    // We don't need try catch as if any error occurs it propagates to the top as the value returns
     async createProblem(problemData: ProblemData): Promise<any> {
         problemData.description = markdownSanitizer(problemData.description);
         const problem = await this.problemRepository.createProblem(problemData);

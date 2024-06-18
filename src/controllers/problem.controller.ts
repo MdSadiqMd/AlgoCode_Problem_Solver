@@ -26,7 +26,13 @@ async function addProblem(req: Request, res: Response, next: NextFunction) {
 
 async function getProblem(req: Request, res: Response, next: NextFunction) {
   try {
-    throw new NotImplemented("get Problem");
+    const problem = await problemService.getProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: "true",
+      message: "Problem Fetched",
+      error: {},
+      data: problem
+    })
   } catch (error) {
     next(error);
   }
@@ -34,7 +40,13 @@ async function getProblem(req: Request, res: Response, next: NextFunction) {
 
 async function getProblems(req: Request, res: Response, next: NextFunction) {
   try {
-    throw new NotImplemented("get Problems");
+    const response = await problemService.getAllProblems();
+    return res.status(StatusCodes.OK).json({
+      success: "true",
+      message: "All Problems Fetched",
+      error: {},
+      data: response
+    })
   } catch (error) {
     next(error);
   }

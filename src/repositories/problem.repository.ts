@@ -1,4 +1,5 @@
 const { Problem } = require('../models/index');
+const NotFound = require('../errors/notfound.error')
 
 interface ProblemData {
     title: string;
@@ -18,7 +19,28 @@ class ProblemRepository {
             });
             return problem;
         } catch (error) {
-            console.log(error);
+            //console.log(error);
+            throw error;
+        }
+    }
+    async getAllProblems() {
+        try {
+            const problems = await Problem.find({});
+            return problems;
+        } catch (error) {
+            //console.log(error);
+            throw error;
+        }
+    }
+    async getProblem(id: String) {
+        try {
+            const problem = await Problem.findById(id);
+            if (!problem) {
+                throw new NotFound('Problem', id)
+            }
+            return problem;
+        } catch (error) {
+            //console.log(error);
             throw error;
         }
     }
