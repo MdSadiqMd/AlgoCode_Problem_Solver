@@ -16,9 +16,10 @@ app.get("/ping", (req: Request, res: Response) => {
   return res.json({ message: "Pong from root" });
 });
 
-app.use(errorHandler); // It is put in last as express has an built-in error Handler if we keep it in the start then it is of no use
+app.use(errorHandler.errorHandler); // It is put in last as express has an built-in error Handler if we keep it in the start then it is of no use
 
 app.listen(PORT, async () => {
   console.log(`server started at ${PORT}`);
   connectDB();
+  console.log('Connected to Database');
 });

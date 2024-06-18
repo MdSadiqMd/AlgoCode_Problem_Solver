@@ -1,19 +1,30 @@
 import { NextFunction, Request, Response } from "express";
 const NotImplemented = require("../errors/notimplemented.error");
+const { ProblemService } = require('../services/index');
+const { ProblemRepository } = require('../repositories/index');
+const StatusCodes = require('http-status-codes')
+
+const problemService = new ProblemService(new ProblemRepository());
 
 function pingProblemController(req: Request, res: Response) {
   return res.json({ message: "pong problem controller" });
 }
 
-function addProblem(req: Request, res: Response, next: NextFunction) {
+async function addProblem(req: Request, res: Response, next: NextFunction) {
   try {
-    throw new NotImplemented("add Problem");
+    const newProblem = await problemService.createProblem(req.body);
+    return res.status(StatusCodes.CREATED).json({
+      success: true,
+      message: 'New Problem Created Succesfully',
+      error: {},
+      data: newProblem
+    })
   } catch (error) {
     next(error);
   }
 }
 
-function getProblem(req: Request, res: Response, next: NextFunction) {
+async function getProblem(req: Request, res: Response, next: NextFunction) {
   try {
     throw new NotImplemented("get Problem");
   } catch (error) {
@@ -21,7 +32,7 @@ function getProblem(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-function getProblems(req: Request, res: Response, next: NextFunction) {
+async function getProblems(req: Request, res: Response, next: NextFunction) {
   try {
     throw new NotImplemented("get Problems");
   } catch (error) {
