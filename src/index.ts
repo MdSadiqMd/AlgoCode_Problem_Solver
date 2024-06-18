@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 const apiRouter = require("./routes/index");
 const bodyParser = require("body-parser");
 const { PORT } = require("./config/server.config");
-const errorHandler = require("./utils/errorHandler");
+const errorHandler = require("./utils/index");
 const connectDB = require('./config/db.config')
 
 const app = express();

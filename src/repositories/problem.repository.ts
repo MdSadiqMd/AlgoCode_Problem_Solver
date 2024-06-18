@@ -7,7 +7,7 @@ interface ProblemData {
     testCases?: any[];
 }
 
-const ProblemRepository = {
+class ProblemRepository {
     async createProblem(problemData: ProblemData) {
         try {
             const problem = await Problem.create({
