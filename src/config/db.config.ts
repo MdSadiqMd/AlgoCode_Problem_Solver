@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const { ATLAS_DB_URL, NODE_ENV } = require("./server.config");
 
 async function connectToDB() {
