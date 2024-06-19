@@ -18,7 +18,6 @@ class ProblemRepository {
                 difficulty: problemData.difficulty ?? "easy",
                 testcases: problemData.testcases ?? []
             });
-            logger.info(`Problem created with ID: ${problem._id}`);
             return problem;
         } catch (error) {
             logger.error('Error creating problem', error);
@@ -33,7 +32,6 @@ class ProblemRepository {
                 logger.warn(`Problem with ID: ${id} not found`);
                 throw new NotFound('Problem', id);
             }
-            logger.info(`Problem with ID: ${id} retrieved`);
             return problem;
         } catch (error) {
             logger.error(`Error retrieving problem with ID: ${id}`, error);
@@ -44,7 +42,6 @@ class ProblemRepository {
     async getAllProblems() {
         try {
             const problems = await Problem.find({});
-            logger.info(`Retrieved all problems`);
             return problems;
         } catch (error) {
             logger.error('Error retrieving all problems', error);
@@ -62,14 +59,13 @@ class ProblemRepository {
                 logger.warn(`Problem with ID: ${id} not found for update`);
                 throw new NotFound('Problem', id);
             }
-            logger.info(`Problem with ID: ${id} updated`);
             return updatedProblem;
         } catch (error) {
             logger.error(`Error updating problem with ID: ${id}`, error);
             throw error;
         }
     }
-    
+
     async deleteProblem(id: string) {
         try {
             const deleteProblem = await Problem.findByIdAndDelete(id);
@@ -77,13 +73,12 @@ class ProblemRepository {
                 logger.warn(`Problem with ID: ${id} not found for deletion`);
                 throw new NotFound('Problem', id);
             }
-            logger.info(`Problem with ID: ${id} deleted`);
             return deleteProblem;
         } catch (error) {
             logger.error(`Error deleting problem with ID: ${id}`, error);
             throw error;
         }
     }
-}
+};
 
 module.exports = ProblemRepository;
