@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-const NotImplemented = require("../errors/notimplemented.error");
 const { ProblemService } = require('../services/index');
 const { ProblemRepository } = require('../repositories/index');
 const StatusCodes = require('http-status-codes')
@@ -12,6 +11,7 @@ function pingProblemController(req: Request, res: Response) {
 
 async function addProblem(req: Request, res: Response, next: NextFunction) {
   try {
+    //testcase debug
     const newProblem = await problemService.createProblem(req.body);
     return res.status(StatusCodes.CREATED).json({
       success: true,
@@ -52,17 +52,29 @@ async function getProblems(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-function deleteProblem(req: Request, res: Response, next: NextFunction) {
+async function updateProblem(req: Request, res: Response, next: NextFunction) {
   try {
-    throw new NotImplemented("delete Problem");
+    const updatedProblem = await problemService.updateProblem(req.params.id, req.body);
+    return res.status(StatusCodes.OK).json({
+      success: "true",
+      message: "Problem Updated",
+      error: {},
+      data: updatedProblem
+    });
   } catch (error) {
     next(error);
   }
 }
 
-function updateProblem(req: Request, res: Response, next: NextFunction) {
+async function deleteProblem(req: Request, res: Response, next: NextFunction) {
   try {
-    throw new NotImplemented("update Problem");
+    const deleteProblem = await problemService.deleteProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: "true",
+      message: "Problem Deleted",
+      error: {},
+      data: deleteProblem
+    })
   } catch (error) {
     next(error);
   }
@@ -73,6 +85,6 @@ module.exports = {
   addProblem,
   getProblem,
   getProblems,
-  deleteProblem,
   updateProblem,
+  deleteProblem,
 };

@@ -5,7 +5,7 @@ interface ProblemData {
     title: string;
     description: string;
     difficulty?: string;
-    testCases?: any[];
+    testcases?: any[];
 }
 
 class ProblemRepository {
@@ -15,8 +15,20 @@ class ProblemRepository {
                 title: problemData.title,
                 description: problemData.description,
                 difficulty: problemData.difficulty ?? "easy",
-                testCases: problemData.testCases ?? []
+                testcases: problemData.testcases ?? []
             });
+            return problem;
+        } catch (error) {
+            //console.log(error);
+            throw error;
+        }
+    }
+    async getProblem(id: String) {
+        try {
+            const problem = await Problem.findById(id);
+            if (!problem) {
+                throw new NotFound('Problem', id)
+            }
             return problem;
         } catch (error) {
             //console.log(error);
@@ -32,13 +44,28 @@ class ProblemRepository {
             throw error;
         }
     }
-    async getProblem(id: String) {
+    async updateProblem(id: string, updatedData: Partial<ProblemData>) {
         try {
-            const problem = await Problem.findById(id);
-            if (!problem) {
+            const updatedProblem = await Problem.findByIdAndUpdate(id, { $set: updatedData }, {
+                new: true,
+                runValidators: true
+            });
+            if (!updatedProblem) {
+                throw new NotFound('Problem', id);
+            }
+            return updatedProblem;
+        } catch (error) {
+            //console.error(error);
+            throw error;
+        }
+    }
+    async deleteProblem(id: String) {
+        try {
+            const deleteProblem = await Problem.findByIdAndDelete(id);
+            if (!deleteProblem) {
                 throw new NotFound('Problem', id)
             }
-            return problem;
+            return deleteProblem;
         } catch (error) {
             //console.log(error);
             throw error;

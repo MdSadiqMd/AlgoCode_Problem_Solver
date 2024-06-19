@@ -11,6 +11,7 @@ interface ProblemRepository {
     createProblem(problemData: ProblemData): Promise<any>;
     getAllProblems(): Promise<any[]>;
     getProblem(problemId: string): Promise<any>;
+    updateProblem(problemId: string, updatedData: Partial<ProblemData>): Promise<any>;
     deleteProblem(problemId: string): Promise<any>;
 }
 
@@ -35,6 +36,14 @@ class ProblemService {
 
     async getProblem(problemId: string): Promise<any> {
         const problem = await this.problemRepository.getProblem(problemId);
+        return problem;
+    }
+
+    async updateProblem(problemId: string, updatedData: Partial<ProblemData>): Promise<any> {
+        if (updatedData.description) {
+            updatedData.description = markdownSanitizer(updatedData.description);
+        }
+        const problem = await this.problemRepository.updateProblem(problemId, updatedData);
         return problem;
     }
 
