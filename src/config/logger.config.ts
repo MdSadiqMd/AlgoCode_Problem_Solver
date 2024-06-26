@@ -13,11 +13,11 @@ allowedTransports.push(new winston.transports.Console({
 }));
 
 // MongoDB transport for error logs
-allowedTransports.push(new winston.transports.MongoDB({
+/* allowedTransports.push(new winston.transports.MongoDB({
   level: 'error',
   db: LOG_DB_URL,
   collection: 'logs',
-}));
+})); */
 
 // File transport for logging to app.log
 /* allowedTransports.push(new winston.transports.File({
