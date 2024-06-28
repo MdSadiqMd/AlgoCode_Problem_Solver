@@ -27,6 +27,10 @@
     "winston-mongodb": "^5.1.1"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__template": "^7.4.4",
+    "@types/babel__traverse": "^7.20.6",
     "@types/winston": "^2.4.4"
   }
 }
