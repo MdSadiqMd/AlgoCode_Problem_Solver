@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const problemSchema = new mongoose.Schema({
     title: {
@@ -15,7 +15,7 @@ const problemSchema = new mongoose.Schema({
         required: [true, 'Difficulty tag of the problem cannot be empty'],
         default: 'easy'
     },
-    testcases: [
+    testCases: [
         {
             input: {
                 type: String,
@@ -27,10 +27,28 @@ const problemSchema = new mongoose.Schema({
             }
         }
     ],
+    codeStubs: [
+        {
+            language: {
+                type: String,
+                enum: ['CPP', 'JAVA', 'PYTHON'],
+                required: true,
+            },
+            startSnippet: {
+                type: String,
+            },
+            userSnippet: {
+                type: String,
+            },
+            endSnippet: {
+                type: String,
+            }
+        }
+    ],
     editorial: {
         type: String,
     }
-})
+});
 
 const Problem = mongoose.model('Problem', problemSchema);
 module.exports = Problem;

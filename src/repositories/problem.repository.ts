@@ -6,7 +6,8 @@ interface ProblemData {
     title: string;
     description: string;
     difficulty?: string;
-    testcases?: any[];
+    codeStubs: string;
+    testCases?: string[];
 }
 
 class ProblemRepository {
@@ -16,7 +17,8 @@ class ProblemRepository {
                 title: problemData.title,
                 description: problemData.description,
                 difficulty: problemData.difficulty ?? "easy",
-                testcases: problemData.testcases ?? []
+                codeStubs: problemData.codeStubs,
+                testCases: problemData.testCases ?? []
             });
             logger.info(`Problem created with ID: ${problem._id}`);
             return problem;
