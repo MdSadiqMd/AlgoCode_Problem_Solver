@@ -3,7 +3,7 @@ const apiRouter = require("./routes/index");
 const bodyParser = require("body-parser");
 const { PORT } = require("./config/server.config");
 const errorHandler = require("./utils/index");
-const connectDB = require('./config/db.config')
+const db = require('./config/db.config');
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,6 +20,5 @@ app.use(errorHandler.errorHandler); // It is put in last as express has an built
 
 app.listen(PORT, async () => {
   console.log(`server started at ${PORT}`);
-  connectDB();
-  console.log('Connected to Database');
+  await db.connect();
 });
