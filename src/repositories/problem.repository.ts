@@ -20,7 +20,7 @@ class ProblemRepository {
                 codeStubs: problemData.codeStubs,
                 testCases: problemData.testCases ?? []
             });
-            logger.info(`Problem created with ID: ${problem._id}`);
+            logger.info(`Problem created: ${problem}`);
             return problem;
         } catch (error) {
             logger.error('Error creating problem', error);
@@ -35,7 +35,7 @@ class ProblemRepository {
                 logger.warn(`Problem with ID: ${id} not found`);
                 throw new NotFound('Problem', id);
             }
-            logger.info(`Problem with ID: ${id} retrieved`);
+            logger.info(`Problem: ${problem} with ID: ${id} retrieved`);
             return problem;
         } catch (error) {
             logger.error(`Error retrieving problem with ID: ${id}`, error);
