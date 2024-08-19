@@ -1,4 +1,6 @@
 import express, { Request, Response } from "express";
+import cors from 'cors';
+
 const apiRouter = require("./routes/index");
 const bodyParser = require("body-parser");
 const { PORT } = require("./config/server.config");
@@ -6,6 +8,13 @@ const errorHandler = require("./utils/index");
 const db = require('./config/db.config');
 
 const app = express();
+const allowedOrigins = ['http://localhost:3000'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
