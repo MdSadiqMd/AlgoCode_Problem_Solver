@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
+
 const { ProblemService } = require('../services/index');
 const { ProblemRepository } = require('../repositories/index');
-const StatusCodes = require('http-status-codes')
+const StatusCodes = require('http-status-codes');
 
 const problemService = new ProblemService(new ProblemRepository());
 
@@ -11,14 +12,13 @@ function pingProblemController(req: Request, res: Response) {
 
 async function addProblem(req: Request, res: Response, next: NextFunction) {
   try {
-    //testcase debug
     const newProblem = await problemService.createProblem(req.body);
     return res.status(StatusCodes.CREATED).json({
       success: true,
       message: 'New Problem Created Succesfully',
       error: {},
       data: newProblem
-    })
+    });
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,7 @@ async function getProblem(req: Request, res: Response, next: NextFunction) {
       message: "Problem Fetched",
       error: {},
       data: problem
-    })
+    });
   } catch (error) {
     next(error);
   }
@@ -46,7 +46,7 @@ async function getProblems(req: Request, res: Response, next: NextFunction) {
       message: "All Problems Fetched",
       error: {},
       data: response
-    })
+    });
   } catch (error) {
     next(error);
   }
@@ -74,7 +74,7 @@ async function deleteProblem(req: Request, res: Response, next: NextFunction) {
       message: "Problem Deleted",
       error: {},
       data: deleteProblem
-    })
+    });
   } catch (error) {
     next(error);
   }
