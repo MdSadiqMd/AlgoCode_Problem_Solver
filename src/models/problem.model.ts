@@ -9,6 +9,17 @@ const problemSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Description of the problem cannot be empty']
     },
+    status: {
+        type: String,
+        enum: ['Not Attempted', 'Attempted', 'Completed'],
+        required: [true, 'Status tag of the problem cannot be empty'],
+        default: 'Not Attempted'
+    },
+    acceptance: {
+        type: mongoose.Types.Decimal128,
+        required: [true, 'Acceptance tag of the problem cannot be empty'],
+        default: 100
+    },
     difficulty: {
         type: String,
         enum: ['easy', 'medium', 'hard'],
