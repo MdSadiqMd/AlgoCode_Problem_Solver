@@ -1,16 +1,17 @@
-import express, { Request, Response } from "express";
-import cors from 'cors';
-
-const apiRouter = require("./routes/index");
-const bodyParser = require("body-parser");
-const { PORT } = require("./config/server.config");
-const errorHandler = require("./utils/index");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const apiRouter = require('./routes/index');
+const { PORT } = require('./config/server.config');
+const errorHandler = require('./utils/index');
 const db = require('./config/db.config');
+
+type CorsOptions = typeof cors.CorsOptions;
 
 const app = express();
 const allowedOrigins = ['http://localhost:3000'];
 
-const options: cors.CorsOptions = {
+const options: CorsOptions = {
   origin: allowedOrigins
 };
 
@@ -21,11 +22,11 @@ app.use(bodyParser.text());
 
 app.use("/api", apiRouter);
 
-app.get("/ping", (req: Request, res: Response) => {
+app.get("/ping", (req: any, res: any) => {
   return res.json({ message: "Pong from root" });
 });
 
-app.use(errorHandler.errorHandler); // It is put in last as express has an built-in error Handler if we keep it in the start then it is of no use
+app.use(errorHandler.errorHandler);
 
 app.listen(PORT, async () => {
   console.log(`server started at ${PORT}`);
